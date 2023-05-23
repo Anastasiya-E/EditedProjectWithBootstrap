@@ -8,11 +8,11 @@
         <version>2.4.4</version>
         <relativePath/>
     </parent>
-    <groupId>ru.itsinfo</groupId>
+    <groupId>com.springsecuritybootstrap</groupId>
     <artifactId>SpringSecurityBootstrap</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringSecurityBootstrap</name>
-    <description>Project Spring Boot</description>
+    <description>Project Spring Security Bootstrap</description>
     <properties>
         <java.version>11</java.version>
     </properties>
