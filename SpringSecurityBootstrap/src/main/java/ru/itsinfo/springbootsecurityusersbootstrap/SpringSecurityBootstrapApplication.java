@@ -13,23 +13,23 @@ import ru.itsinfo.springbootsecurityusersbootstrap.repository.UserRepository;
 import java.util.HashSet;
 
 @SpringBootApplication
-public class SpringBootSecurityUsersBootstrapApplication implements CommandLineRunner {
+public class SpringSecurityBootstrapApplication implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SpringBootSecurityUsersBootstrapApplication(RoleRepository roleRepository,
-                                                       UserRepository userRepository,
-                                                       PasswordEncoder passwordEncoder) {
+    public SpringSecurityBootstrapApplication(RoleRepository roleRepository,
+                                              UserRepository userRepository,
+                                              PasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootSecurityUsersBootstrapApplication.class, args);
+        SpringApplication.run(SpringSecurityBootstrapApplication.class, args);
     }
 
     @Override

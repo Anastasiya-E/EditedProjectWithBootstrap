@@ -13,7 +13,7 @@ server:
 
 spring:
   application:
-    name: Spring Boot Security Bootstrap
+    name: SpringSecurityBootstrap
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mydb?verifyServerCertificate=false&useSSL=false&requireSSL=false&serverTimezone=Europe/Moscow&useLegacyDatetimeCode=false

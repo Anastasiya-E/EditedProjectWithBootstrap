@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Spring-Boot-Security-Users-Bootstrap-master/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringSecurityBootstrap/pom.xml" />
       </list>
     </option>
   </component>
