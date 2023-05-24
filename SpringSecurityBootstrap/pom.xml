@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringSecurityBootstrap</name>
     <description>Project Spring Security Bootstrap</description>
+
     <properties>
         <java.version>11</java.version>
     </properties>

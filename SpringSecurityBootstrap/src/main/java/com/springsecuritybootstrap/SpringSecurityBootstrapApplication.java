@@ -40,13 +40,13 @@ public class SpringSecurityBootstrapApplication implements CommandLineRunner {
         roleRepository.save(user);
         roleRepository.save(new Role("ROLE_GUEST"));
 
-        userRepository.save(new User("Василий", "Уткин", 49, "admin@mail.com",
+        userRepository.save(new User("Иван", "Иванов", 30, "admin@mail.com",
                 passwordEncoder.encode("admin"),
                 new HashSet<>() {{
                     add(admin);
                     add(user);
                 }}));
-        userRepository.save(new User("Дмитрий", "Губерниев", 46, "user@mail.com",
+        userRepository.save(new User("Петр", "Петров", 28, "user@mail.com",
                 passwordEncoder.encode("user"),
                 new HashSet<>() {{
                     add(user);
