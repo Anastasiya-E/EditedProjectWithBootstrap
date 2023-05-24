@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class AppServiceImpl implements AppService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(() ->
@@ -41,11 +43,13 @@ public class AppServiceImpl implements AppService {
         );
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Iterable<Role> findAllRoles() {
         return roleRepository.findAll();
     }
 
+    @Transactional
     @Override
     public void authenticateOrLogout(Model model, HttpSession session, LoginException authenticationException, String authenticationName) {
         if (authenticationException != null) {
@@ -69,17 +73,20 @@ public class AppServiceImpl implements AppService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName", "lastName"));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User findUser(Long userId) throws IllegalArgumentException {
         return userRepository.findById(userId).orElseThrow(() ->
                 new IllegalArgumentException(String.format("User with ID %d not found", userId)));
     }
 
+    @Transactional
     @Override
     public void insertUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (!bindingResult.hasErrors()) {
@@ -97,6 +104,7 @@ public class AppServiceImpl implements AppService {
         }
     }
 
+    @Transactional
     @Override
     public void updateUser(User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         bindingResult = checkBindingResultForPasswordField(bindingResult);
@@ -144,6 +152,7 @@ public class AppServiceImpl implements AppService {
         return newBindingResult;
     }
 
+    @Transactional
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
