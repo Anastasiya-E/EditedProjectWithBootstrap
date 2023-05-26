@@ -15,8 +15,11 @@ import java.util.*;
 
 @Entity
 @Table(name = "users", indexes = {@Index(columnList = "name, last_name ASC")})
-public final class User extends AbstractEntity<Long> implements UserDetails {
+public final class User implements UserDetails {
     private static final long serialVersionUID = 2715270014679085151L;
+
+    @Id
+    private Long id;
 
     @Column(name = "name")
     @NotEmpty(message = "Name should not be empty")
@@ -52,6 +55,14 @@ public final class User extends AbstractEntity<Long> implements UserDetails {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -148,5 +159,9 @@ public final class User extends AbstractEntity<Long> implements UserDetails {
     public String toString() {
         return String.format("User [id = %d; firstName = %s; lastName = %s; email = %s; password = %s; roles = (%s)]",
                 this.getId(), firstName, lastName, email, password, Collections.singletonList(roles));
+    }
+
+    public boolean isNew() {
+        return null == getId();
     }
 }

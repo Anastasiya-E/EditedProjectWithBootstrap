@@ -2,17 +2,17 @@ package com.springsecuritybootstrap.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public final class Role extends AbstractEntity<Integer> implements GrantedAuthority {
+public final class Role implements GrantedAuthority {
     private static final long serialVersionUID = 7217778059836250424L;
+
+    @Id
+    private Long id;
 
     @Column(unique = true)
     private String name;
@@ -27,8 +27,16 @@ public final class Role extends AbstractEntity<Integer> implements GrantedAuthor
         this.name = name;
     }
 
-    public Role(Integer id) {
+    public Role(Long id) {
         this.setId(id);
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
