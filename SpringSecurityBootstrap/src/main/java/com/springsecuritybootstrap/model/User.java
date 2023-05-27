@@ -11,14 +11,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "users", indexes = {@Index(columnList = "name, last_name ASC")})
-public final class User implements UserDetails {
+public final class User implements UserDetails, Serializable {
     private static final long serialVersionUID = 2715270014679085151L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
@@ -42,7 +44,9 @@ public final class User implements UserDetails {
 
     @Fetch(FetchMode.JOIN)
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles")
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
     public User() {
@@ -163,5 +167,18 @@ public final class User implements UserDetails {
 
     public boolean isNew() {
         return null == getId();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

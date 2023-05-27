@@ -3,15 +3,17 @@ package com.springsecuritybootstrap.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
-public final class Role implements GrantedAuthority {
-    private static final long serialVersionUID = 7217778059836250424L;
+public class Role implements GrantedAuthority, Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
@@ -28,7 +30,7 @@ public final class Role implements GrantedAuthority {
     }
 
     public Role(Long id) {
-        this.setId(id);
+        this.id = id;
     }
 
     public Long getId(){
@@ -47,13 +49,34 @@ public final class Role implements GrantedAuthority {
         this.name = name;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Role [id = %d; name = %s;]", this.getId(), name);
+    }
+
     @Override
     public String getAuthority() {
         return name;
     }
 
     @Override
-    public String toString() {
-        return String.format("Role [id = %d; name = %s;]", this.getId(), name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
