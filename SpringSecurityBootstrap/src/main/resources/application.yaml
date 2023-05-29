@@ -28,7 +28,7 @@ spring:
       hibernate:
         format_sql: true
         highlight_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         hbm2ddl:
           charset_name: UTF-8
     open-in-view: false
